@@ -60,19 +60,82 @@ class CalculadoraState extends State<Calculadora> {
                   ),
                   color: Colors.purple,
                   onPressed: somar,
-                )
+                ),
+                new MaterialButton(
+                  
+                  child: new Text(
+                    "-",
+                    style: new TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  color: Colors.purple,
+                  onPressed: subtrair,
+                ), 
               ],
-            )
-          ],
+            ),
+
+            new Padding(padding: const EdgeInsets.only(top: 20)),
+
+            // Nova linha(row)
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new MaterialButton(
+                  child: new Text(
+                    "*",
+                    style: new TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  color: Colors.purple,
+                  onPressed: multiplicar,
+                ),
+                new MaterialButton(
+                  child: new Text(
+                    "/",
+                    style: new TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  color: Colors.purple,
+                  onPressed: dividir,
+                ),
+              ],
+            ),
+
+            new Padding(padding: const EdgeInsets.only(top: 20)),
+
+            // Nova linha(row)
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: <Widget>[
+                new MaterialButton(
+                  child: new Text(
+                    "Limpar",
+                    style: new TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  color: Colors.purple,
+                  onPressed: limpar,
+                ),
+              ],
+            ),
+          ]
         ),
       ),
     );
   }
 
   //Atributos
-  var valor1;
-  var valor2;
-  var resultado = 0;
+  num valor1 = 0;
+  num valor2 = 0;
+  String resultado = "0";
 
   TextEditingController campoValor1 = new TextEditingController(text: "");
   TextEditingController campoValor2 = new TextEditingController(text: "");
@@ -82,7 +145,41 @@ class CalculadoraState extends State<Calculadora> {
     setState(() {
       valor1 = num.parse(campoValor1.text);
       valor2 = num.parse(campoValor2.text);
-      resultado = valor1 + valor2;
+      resultado = (valor1 + valor2).toStringAsFixed(2);
+    });
+  }
+
+  void subtrair() {
+    setState(() {
+      valor1 = num.parse(campoValor1.text);
+      valor2 = num.parse(campoValor2.text);
+      resultado = (valor1 - valor2).toStringAsFixed(2);
+    });
+  }
+
+  void dividir() {
+    setState(() {
+      valor1 = num.parse(campoValor1.text);
+      valor2 = num.parse(campoValor2.text);
+      resultado = (valor1 / valor2).toStringAsFixed(2);
+    });
+  }
+
+  void multiplicar() {
+    setState(() {
+      valor1 = num.parse(campoValor1.text);
+      valor2 = num.parse(campoValor2.text);
+     resultado = (valor1 * valor2).toStringAsFixed(2);
+    });
+  }
+
+  //Botão limpar
+
+  void limpar() {
+    setState(() {
+      resultado = "0";
+      campoValor1.text = "";
+      campoValor2.text = "";
     });
   }
 }
