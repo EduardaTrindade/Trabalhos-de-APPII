@@ -11,9 +11,7 @@ class LayoutState extends State<Layout> {
     return MaterialApp(
         home: Scaffold(
       // Barra de Título
-      appBar: new AppBar(
-        title: new Text("Layout - Flutter"),
-      ),
+      appBar: new AppBar(title: new Text("Layout - Flutter")),
 
       // Menu Lateral (hambúrguer)
       drawer: new Drawer(
@@ -22,16 +20,16 @@ class LayoutState extends State<Layout> {
           children: <Widget>[
             // Cabeçalho do Menu
             const DrawerHeader(
-                decoration: BoxDecoration(color: Colors.blue),
+                // decoration: BoxDecoration(color: Colors.blue),
                 child: Text("Itens do Menu")),
 
             // Item 1
             ListTile(
               title: new Text("Flutter"),
               subtitle: new Text("Tudo são Widgets"),
-              leading: Icon(
+              leading: new Icon(
                 Icons.flash_on,
-                color: Colors.red,
+                color: Colors.red.shade400,
                 size: 32,
               ),
               trailing: Icon(Icons.keyboard_arrow_right),
@@ -44,8 +42,8 @@ class LayoutState extends State<Layout> {
             // Item 2
             ListTile(
               title: new Text("Dart"),
-              subtitle: new Text("É fácil"),
-              leading: Icon(
+              subtitle: new Text("É muito forte"),
+              leading: new Icon(
                 Icons.mood,
                 color: Colors.amber.shade700,
                 size: 32,
@@ -63,7 +61,7 @@ class LayoutState extends State<Layout> {
               subtitle: new Text("Quero cafééé"),
               leading: Icon(
                 Icons.coffee,
-                color: Colors.brown.shade700,
+                color: Colors.brown,
                 size: 32,
               ),
               trailing: Icon(Icons.keyboard_arrow_right),
@@ -78,27 +76,26 @@ class LayoutState extends State<Layout> {
 
       // Corpo do App
       body: new Center(
-        child: ElevatedButton(
-          onPressed: () {
-            final snackBar = SnackBar(
-              content: new Text("Buenas, esta é uma Snackbar"),
-              action: SnackBarAction(
-                label: "x",
-                onPressed: () {
-                  // Aqui vai o código de alguma ação...
-                },
-              ),
-            );
+          child: ElevatedButton(
+        onPressed: () {
+          SnackBar snackBar = new SnackBar(
+            content: new Text("Buenas, esta é uma Snackbar"),
+            duration: new Duration(milliseconds: 2500), // 1 segundo == 1000
+            behavior: SnackBarBehavior.floating,
+            action: SnackBarAction(
+              label: "OK",
+              onPressed: () {
+                // Aqui vai o código de alguma ação...
+              },
+            ),
+          );
 
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-          },
-          child: Text("Mostrar SnackBar"),
-        ),
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        },
 
-        /*child: new Container(
-          child: Text("Conhecendo o Material App"),
-        )*/
-      ),
+        // Texto do Botão SnackBar
+        child: Text("Mostrar SnackBar"),
+      )),
 
       // Barra de Ícones (inferior)
       bottomNavigationBar: new BottomNavigationBar(
@@ -111,7 +108,7 @@ class LayoutState extends State<Layout> {
               icon: new Icon(Icons.settings), label: "Configurações"),
 
           // Ícone Login
-          BottomNavigationBarItem(icon: new Icon(Icons.login), label: "Login")
+          BottomNavigationBarItem(icon: new Icon(Icons.login), label: "Login"),
         ],
       ),
     ));

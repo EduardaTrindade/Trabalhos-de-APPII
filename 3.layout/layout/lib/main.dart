@@ -8,8 +8,9 @@ class LayoutApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Layout Básico",
-      theme: new ThemeData(primarySwatch: Colors.red),
-      home: Layout(),
+      home: Scaffold(
+        body: Layout(),
+      ),
     );
   }
 }
