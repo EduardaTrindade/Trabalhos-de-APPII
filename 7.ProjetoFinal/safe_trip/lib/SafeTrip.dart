@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:safe_trip/Recursos/Menu.dart';
-import 'Detalhe.dart';
+import 'package:safe_trip/Detalhe.dart';
+import 'package:safe_trip/View/Recursos/Menu.dart';
+
 
 class SafeTrip extends StatefulWidget {
   @override
