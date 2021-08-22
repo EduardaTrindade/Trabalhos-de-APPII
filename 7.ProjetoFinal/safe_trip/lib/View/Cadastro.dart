@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:safe_trip/Model/Usuario.dart';
-import 'package:safe_trip/Model/UsuarioService.dart';
-import 'package:safe_trip/View/Contato.dart';
-import 'package:safe_trip/View/Recursos/Menu.dart';
+import 'package:safe_trip/Model/Contato.dart';
+import 'package:safe_trip/Model/ContatoService.dart';
+
+import 'Busca.dart';
+import 'Recursos/Menu.dart';
 
 class Cadastro extends StatefulWidget {
   @override
@@ -17,8 +18,6 @@ class CadastroState extends State<Cadastro> {
   final fone = TextEditingController();
   final foto = TextEditingController();
   final pagamento = TextEditingController();
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class CadastroState extends State<Cadastro> {
                       new Container(
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(bottom: 15),
-                          child: Text("Cadastro de Usuario",
+                          child: Text("Cadastro de Contato",
                               style: TextStyle(
                                   color: Colors.grey.shade300, fontSize: 24))),
 
@@ -96,35 +95,35 @@ class CadastroState extends State<Cadastro> {
                     ]))));
   } // fecha BUILD
 
-      // Retorna a estrutura do campo input
-    Container campoInput(String nomeCampo, TextEditingController controlador) {
-      return Container(
-          margin: EdgeInsets.only(bottom: 10),
-          child: TextField(
-              // Atributo que recebe o valor do campo
-              controller: controlador,
-              decoration: InputDecoration(
-                  labelText: nomeCampo, // Nome do campo
-                  labelStyle:
-                      TextStyle(color: Colors.grey.shade300, fontSize: 18),
+  // Retorna a estrutura do campo input
+  Container campoInput(String nomeCampo, TextEditingController controlador) {
+    return Container(
+        margin: EdgeInsets.only(bottom: 10),
+        child: TextField(
+            // Atributo que recebe o valor do campo
+            controller: controlador,
+            decoration: InputDecoration(
+                labelText: nomeCampo, // Nome do campo
+                labelStyle:
+                    TextStyle(color: Colors.grey.shade300, fontSize: 18),
 
-                  // Borda do Input
-                  border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey)),
+                // Borda do Input
+                border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.grey)),
 
-                  // Borda do Input selecionado
-                  focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange)))));
-    }
+                // Borda do Input selecionado
+                focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.orange)))));
+  }
 
   // Cadastrar
   void cadastrar() {
-    UsuarioService service = new UsuarioService();
+    ContatoService service = new ContatoService();
 
     // Guarda o último ID
-    int ultimoID = service.listarUsuario().length;
+    int ultimoID = service.listarContatos().length;
 
-        Usuario usuario = new Usuario(
+    Contato contato = new Contato(
         id: ultimoID,
         nome: nome.text,
         sobrenome: sobrenome.text,
@@ -139,7 +138,7 @@ class CadastroState extends State<Cadastro> {
         pagamento: pagamento.text);
 
     // Envia o objeto preenchido para adicionar na lista
-    String mensagem = service.cadastrarUsuario(usuario);
+    String mensagem = service.cadastrarContato(contato);
 
     // Mensagem
     ScaffoldMessenger.of(context).showSnackBar(new SnackBar(
@@ -155,13 +154,11 @@ class CadastroState extends State<Cadastro> {
     // Redireciona para a página de Busca
     Future.delayed(Duration(milliseconds: 2500), () {
       Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => Contato(),
-          ));
+          context, MaterialPageRoute(builder: (context) => new Busca()));
     });
   }
 
+  // Limpar campos
   void limparCampos() {
     this.nome.text = "";
     this.sobrenome.text = "";
@@ -171,4 +168,3 @@ class CadastroState extends State<Cadastro> {
     this.pagamento.text = "";
   }
 }
-

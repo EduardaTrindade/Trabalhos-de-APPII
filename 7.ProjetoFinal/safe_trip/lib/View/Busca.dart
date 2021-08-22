@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:safe_trip/Model/ListaVeiculos.dart';
-import 'package:safe_trip/Model/VeiculosViagem.dart';
+import 'package:safe_trip/Model/Contato.dart';
+import 'package:safe_trip/Model/ContatoService.dart';
+
+import 'Cadastro.dart';
 import 'Recursos/Menu.dart';
-import 'Recursos/PerfilVeiculo.dart';
+import 'Recursos/Perfil.dart';
 
 class Busca extends StatefulWidget {
   @override
@@ -12,12 +14,13 @@ class Busca extends StatefulWidget {
 
 class BuscaState extends State<Busca> {
   // Objeto da classe ContatoService (Model)
-  ListaVeiculos service = new ListaVeiculos();
+  ContatoService service = new ContatoService();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // Barra de Título
+      // appBar: new BarraSuperior(),
 
       // Menu (hambúrguer)
       drawer: new MenuDrawer(),
@@ -25,13 +28,12 @@ class BuscaState extends State<Busca> {
       // Corpo do App
       body: ListView.builder(
         padding: EdgeInsets.fromLTRB(8, 8, 8, 75),
-        itemCount: service.listarVeiculos().length,
+        itemCount: service.listarContatos().length,
         itemBuilder: (BuildContext context, int index) {
           // Guarda o retorno da lista no objeto da classe
-          VeiculosViagem veiculos = service.listarVeiculos().elementAt(index);
+          Contato contato = service.listarContatos().elementAt(index);
 
-          
-         return Container(
+          return Container(
             color: Colors.grey.shade800,
             padding: EdgeInsets.all(5),
             margin: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
@@ -43,17 +45,18 @@ class BuscaState extends State<Busca> {
                   new ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: Image.asset(
-                      veiculos.fotoCarro,
+                      contato.foto,
                       width: 75,
                       height: 75,
                       fit: BoxFit.cover
                     )
                   ),
+
                   // Nome e Fone
                   new Column(
                     children: [
                       new Text(
-                        veiculos.nomeDoMotorista,
+                        contato.nome + " " + contato.sobrenome,
                         style: TextStyle(
                           color: Colors.grey.shade400,
                           fontSize: 24
@@ -63,7 +66,7 @@ class BuscaState extends State<Busca> {
                       SizedBox(height: 10),
 
                       new Text(
-                        veiculos.foneMotorista,
+                        contato.fone,
                         style: TextStyle(
                           fontSize: 18
                         )
@@ -85,8 +88,8 @@ class BuscaState extends State<Busca> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => new PerfilVeiculo(id: veiculos.id)
-                                  )
+                      builder: (context) => new Perfil(id: contato.id)
+                    )
                   );
                 }
               )
@@ -95,18 +98,21 @@ class BuscaState extends State<Busca> {
         }
       ),
 
-      //botão flutuante
+      // Botão flutuante
       floatingActionButton: FloatingActionButton(
         child: FaIcon(
           FontAwesomeIcons.plus,
-          size: 32,
-          color: Colors.white,
+          size: 32
         ),
-        onPressed: (){
-
-        },
-      ),
-
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => new Cadastro()
+            )
+          );
+        }
+      )
     );
   }
 }

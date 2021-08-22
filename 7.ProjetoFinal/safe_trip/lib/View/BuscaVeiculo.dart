@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:safe_trip/Model/Usuario.dart';
-import 'package:safe_trip/Model/UsuarioService.dart';
-import 'package:safe_trip/View/Cadastro.dart';
-import 'package:safe_trip/View/Recursos/PerfilUsuario.dart';
+import 'package:safe_trip/Model/ListaVeiculos.dart';
+import 'package:safe_trip/Model/VeiculosViagem.dart';
 import 'Recursos/Menu.dart';
+import 'Recursos/PerfilVeiculo.dart';
 
-class Contato extends StatefulWidget {
+class BuscaVeiculo extends StatefulWidget {
   @override
-  State createState() => new ContatoState();
+  State createState() => new BuscaState();
 }
 
-class ContatoState extends State<Contato> {
-  // Objeto da classe UsuarioService (Model)
-  UsuarioService service = new UsuarioService();
+class BuscaState extends State<BuscaVeiculo> {
+  // Objeto da classe ContatoService (Model)
+  ListaVeiculos service = new ListaVeiculos();
 
   @override
   Widget build(BuildContext context) {
@@ -26,10 +25,10 @@ class ContatoState extends State<Contato> {
       // Corpo do App
       body: ListView.builder(
         padding: EdgeInsets.fromLTRB(8, 8, 8, 75),
-        itemCount: service.listarUsuario().length,
+        itemCount: service.listarVeiculos().length,
         itemBuilder: (BuildContext context, int index) {
           // Guarda o retorno da lista no objeto da classe
-          Usuario usuario = service.listarUsuario().elementAt(index);
+          VeiculosViagem veiculos = service.listarVeiculos().elementAt(index);
 
           
          return Container(
@@ -44,7 +43,7 @@ class ContatoState extends State<Contato> {
                   new ClipRRect(
                     borderRadius: BorderRadius.circular(50),
                     child: Image.asset(
-                      usuario.foto,
+                      veiculos.fotoCarro,
                       width: 75,
                       height: 75,
                       fit: BoxFit.cover
@@ -54,7 +53,7 @@ class ContatoState extends State<Contato> {
                   new Column(
                     children: [
                       new Text(
-                        usuario.nome,
+                        veiculos.nomeDoMotorista,
                         style: TextStyle(
                           color: Colors.grey.shade400,
                           fontSize: 24
@@ -64,7 +63,7 @@ class ContatoState extends State<Contato> {
                       SizedBox(height: 10),
 
                       new Text(
-                        usuario.fone,
+                        veiculos.foneMotorista,
                         style: TextStyle(
                           fontSize: 18
                         )
@@ -86,8 +85,8 @@ class ContatoState extends State<Contato> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => Perfil(id: usuario.id)
-                    )
+                      builder: (context) => new PerfilVeiculo(id: veiculos.id)
+                                  )
                   );
                 }
               )
