@@ -80,7 +80,8 @@ class MenuDrawer extends StatelessWidget {
 
           // Abre a tela Perfil
           onTap: () {
-            //
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => new Cadastro()));
           }),
 
       // Configurações

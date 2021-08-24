@@ -11,9 +11,9 @@ ThemeData estilo() {
     
     // Botão flutuante (cor)
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: Colors.orange,
+      backgroundColor: Colors.grey.shade500,
       foregroundColor: Colors.white,
-      hoverColor: Colors.orange.shade400
+      hoverColor: Colors.grey.shade300
     )
   );
 }

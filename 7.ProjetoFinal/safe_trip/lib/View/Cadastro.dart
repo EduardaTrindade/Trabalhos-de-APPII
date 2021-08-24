@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:safe_trip/Model/Contato.dart';
 import 'package:safe_trip/Model/ContatoService.dart';
-
 import 'Busca.dart';
 import 'Recursos/Menu.dart';
 
@@ -40,7 +39,7 @@ class CadastroState extends State<Cadastro> {
                       new Container(
                           alignment: Alignment.centerLeft,
                           margin: EdgeInsets.only(bottom: 15),
-                          child: Text("Cadastro de Contato",
+                          child: Text("Cadastro de Usuário",
                               style: TextStyle(
                                   color: Colors.grey.shade300, fontSize: 24))),
 
@@ -69,7 +68,7 @@ class CadastroState extends State<Cadastro> {
                                               color: Colors.white,
                                               fontSize: 18))),
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.orange),
+                                      primary: Colors.grey.shade500),
                                   onPressed: () {
                                     cadastrar();
                                   });
@@ -86,7 +85,7 @@ class CadastroState extends State<Cadastro> {
                                               color: Colors.white,
                                               fontSize: 18))),
                                   style: ElevatedButton.styleFrom(
-                                      primary: Colors.grey.shade600),
+                                      primary: Colors.grey.shade700),
                                   onPressed: () {
                                     limparCampos();
                                   });
@@ -113,7 +112,7 @@ class CadastroState extends State<Cadastro> {
 
                 // Borda do Input selecionado
                 focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.orange)))));
+                    borderSide: BorderSide(color: Colors.white)))));
   }
 
   // Cadastrar
